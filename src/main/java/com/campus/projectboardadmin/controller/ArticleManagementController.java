@@ -20,6 +20,10 @@ public class ArticleManagementController {
 
   @GetMapping
   public String articles(Model model) {
+    model.addAttribute(
+        "articles",
+        articleManagementService.getArticles().stream().map(ArticleResponse::withoutContent).toList()
+    );
 
     return "management/articles";
   }
@@ -27,12 +31,12 @@ public class ArticleManagementController {
   @ResponseBody
   @GetMapping("/{articleId}")
   public ArticleResponse article(@PathVariable Long articleId) {
-
-      return null;
+    return ArticleResponse.withContent(articleManagementService.getArticle(articleId));
   }
 
   @PostMapping("/{articleId}")
   public String deleteArticle(@PathVariable Long articleId) {
+    articleManagementService.deleteArticle(articleId);
 
     return "redirect:/management/articles";
   }
