@@ -1,6 +1,6 @@
 package com.campus.projectboardadmin.controller;
 
-import com.campus.projectboardadmin.dto.ArticleResponse;
+import com.campus.projectboardadmin.dto.response.ArticleResponse;
 import com.campus.projectboardadmin.service.ArticleManagementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

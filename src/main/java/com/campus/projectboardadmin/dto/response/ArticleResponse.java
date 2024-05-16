@@ -1,5 +1,7 @@
-package com.campus.projectboardadmin.dto;
+package com.campus.projectboardadmin.dto.response;
 
+import com.campus.projectboardadmin.dto.ArticleDto;
+import com.campus.projectboardadmin.dto.UserAccountDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.LocalDateTime;
 
