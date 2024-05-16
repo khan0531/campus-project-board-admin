@@ -1,13 +1,38 @@
 package com.campus.projectboardadmin.controller;
 
+import com.campus.projectboardadmin.dto.response.UserAccountResponse;
+import com.campus.projectboardadmin.service.UserAccountManagementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequiredArgsConstructor
 @RequestMapping("/management/user-accounts")
 @Controller
 public class UserAccountManagementController {
 
+  private final UserAccountManagementService userAccountManagementService;
+
+  @GetMapping
+  public String userAccounts(Model model) {
+
+    return "management/user-accounts";
+  }
+
+  @ResponseBody
+  @GetMapping("/{userId}")
+  public UserAccountResponse userAccount(@PathVariable String userId) {
+    return null;
+  }
+
+  @PostMapping("/{userId}")
+  public String deleteUserAccount(@PathVariable String userId) {
+    return "redirect:/management/user-accounts";
+  }
 
 }
