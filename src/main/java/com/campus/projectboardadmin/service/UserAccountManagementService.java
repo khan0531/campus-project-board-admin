@@ -5,6 +5,7 @@ import com.campus.projectboardadmin.dto.properties.ProjectProperties;
 import com.campus.projectboardadmin.dto.response.UserAccountClientResponse;
 import java.net.URI;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,15 @@ public class UserAccountManagementService {
     UserAccountClientResponse response = restTemplate.getForObject(uri, UserAccountClientResponse.class);
 
     return Optional.ofNullable(response).orElseGet(UserAccountClientResponse::empty).userAccounts();
+  }
+
+  public UserAccountDto getUserAccount(String userId) {
+    URI uri = UriComponentsBuilder.fromHttpUrl(projectProperties.board().url() + "/api/userAccounts/" + userId)
+        .build()
+        .toUri();
+    UserAccountDto response = restTemplate.getForObject(uri, UserAccountDto.class);
+
+    return Optional.ofNullable(response)
+        .orElseThrow(() -> new NoSuchElementException("게시글이 없습니다 - userId: " + userId));
   }
 }

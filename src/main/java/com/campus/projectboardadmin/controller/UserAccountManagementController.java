@@ -31,7 +31,7 @@ public class UserAccountManagementController {
   @ResponseBody
   @GetMapping("/{userId}")
   public UserAccountResponse userAccount(@PathVariable String userId) {
-    return null;
+    return UserAccountResponse.from(userAccountManagementService.getUserAccount(userId));
   }
 
   @PostMapping("/{userId}")
