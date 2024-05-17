@@ -20,17 +20,24 @@ public class ArticleCommentManagementController {
 
   @GetMapping
   public String articleComments(Model model) {
+    model.addAttribute(
+        "comments",
+        articleCommentManagementService.getArticleComments().stream().map(ArticleCommentResponse::of).toList()
+    );
+
     return "management/article-comments";
   }
 
   @ResponseBody
   @GetMapping("/{articleCommentId}")
   public ArticleCommentResponse articleComment(@PathVariable Long articleCommentId) {
-    return null;
+    return ArticleCommentResponse.of(articleCommentManagementService.getArticleComment(articleCommentId));
   }
 
   @PostMapping("/{articleCommentId}")
   public String deleteArticleComment(@PathVariable Long articleCommentId) {
+
+    articleCommentManagementService.deleteArticleComment(articleCommentId);
 
     return "redirect:/management/article-comments";
   }
