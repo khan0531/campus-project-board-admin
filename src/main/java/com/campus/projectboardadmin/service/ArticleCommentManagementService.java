@@ -40,4 +40,10 @@ public class ArticleCommentManagementService {
         .orElseThrow(() -> new NoSuchElementException("댓글이 없습니다 - articleCommentId: " + articleCommentId));
   }
 
+  public void deleteArticleComment(Long articleCommentId) {
+    URI uri = UriComponentsBuilder.fromHttpUrl(projectProperties.board().url() + "/api/articleComments/" + articleCommentId)
+        .build()
+        .toUri();
+    restTemplate.delete(uri);
+  }
 }

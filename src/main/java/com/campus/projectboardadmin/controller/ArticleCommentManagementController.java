@@ -37,6 +37,8 @@ public class ArticleCommentManagementController {
   @PostMapping("/{articleCommentId}")
   public String deleteArticleComment(@PathVariable Long articleCommentId) {
 
+    articleCommentManagementService.deleteArticleComment(articleCommentId);
+
     return "redirect:/management/article-comments";
   }
 
