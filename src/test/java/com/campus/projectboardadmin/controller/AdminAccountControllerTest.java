@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import com.campus.projectboard.config.SecurityConfig;
+import com.campus.projectboardadmin.config.SecurityConfig;
 import com.campus.projectboardadmin.config.GlobalControllerConfig;
 import com.campus.projectboardadmin.domain.constant.RoleType;
 import com.campus.projectboardadmin.dto.AdminAccountDto;

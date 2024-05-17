@@ -4,7 +4,6 @@ import static org.mockito.ArgumentMatchers.anySet;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
-import com.campus.projectboard.config.SecurityConfig;
 import com.campus.projectboardadmin.domain.constant.RoleType;
 import com.campus.projectboardadmin.dto.AdminAccountDto;
 import com.campus.projectboardadmin.service.AdminAccountService;
