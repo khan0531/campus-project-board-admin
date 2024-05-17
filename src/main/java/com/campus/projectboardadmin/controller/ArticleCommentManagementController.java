@@ -20,6 +20,11 @@ public class ArticleCommentManagementController {
 
   @GetMapping
   public String articleComments(Model model) {
+    model.addAttribute(
+        "comments",
+        articleCommentManagementService.getArticleComments().stream().map(ArticleCommentResponse::of).toList()
+    );
+
     return "management/article-comments";
   }
 

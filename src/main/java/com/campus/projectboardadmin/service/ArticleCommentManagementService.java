@@ -1,10 +1,31 @@
 package com.campus.projectboardadmin.service;
 
+import com.campus.projectboardadmin.dto.ArticleCommentDto;
+import com.campus.projectboardadmin.dto.properties.ProjectProperties;
+import com.campus.projectboardadmin.dto.response.ArticleCommentClientResponse;
+import java.net.URI;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RequiredArgsConstructor
 @Service
 public class ArticleCommentManagementService {
+
+  private final RestTemplate restTemplate;
+  private final ProjectProperties projectProperties;
+
+  public List<ArticleCommentDto> getArticleComments() {
+    URI uri = UriComponentsBuilder.fromHttpUrl(projectProperties.board().url() + "/api/articleComments")
+        .queryParam("size", 10000) // TODO: 전체 댓글을 가져오기 위해 충분히 큰 사이즈를 전달하는 방식. 불완전하다.
+        .build()
+        .toUri();
+    ArticleCommentClientResponse response = restTemplate.getForObject(uri, ArticleCommentClientResponse.class);
+
+    return Optional.ofNullable(response).orElseGet(ArticleCommentClientResponse::empty).articleComments();
+  }
 
 }
