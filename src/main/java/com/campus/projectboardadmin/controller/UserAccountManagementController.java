@@ -36,6 +36,8 @@ public class UserAccountManagementController {
 
   @PostMapping("/{userId}")
   public String deleteUserAccount(@PathVariable String userId) {
+    userAccountManagementService.deleteUserAccount(userId);
+
     return "redirect:/management/user-accounts";
   }
 

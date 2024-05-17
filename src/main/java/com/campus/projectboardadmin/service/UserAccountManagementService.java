@@ -38,4 +38,11 @@ public class UserAccountManagementService {
     return Optional.ofNullable(response)
         .orElseThrow(() -> new NoSuchElementException("게시글이 없습니다 - userId: " + userId));
   }
+
+  public void deleteUserAccount(String userId) {
+    URI uri = UriComponentsBuilder.fromHttpUrl(projectProperties.board().url() + "/api/userAccounts/" + userId)
+        .build()
+        .toUri();
+    restTemplate.delete(uri);
+  }
 }
