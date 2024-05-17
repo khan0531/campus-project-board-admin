@@ -20,6 +20,10 @@ public class UserAccountManagementController {
 
   @GetMapping
   public String userAccounts(Model model) {
+    model.addAttribute(
+        "userAccounts",
+        userAccountManagementService.getUserAccounts().stream().map(UserAccountResponse::from).toList()
+    );
 
     return "management/user-accounts";
   }
@@ -27,11 +31,13 @@ public class UserAccountManagementController {
   @ResponseBody
   @GetMapping("/{userId}")
   public UserAccountResponse userAccount(@PathVariable String userId) {
-    return null;
+    return UserAccountResponse.from(userAccountManagementService.getUserAccount(userId));
   }
 
   @PostMapping("/{userId}")
   public String deleteUserAccount(@PathVariable String userId) {
+    userAccountManagementService.deleteUserAccount(userId);
+
     return "redirect:/management/user-accounts";
   }
 
