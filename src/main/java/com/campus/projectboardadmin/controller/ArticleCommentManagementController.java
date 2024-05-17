@@ -31,7 +31,7 @@ public class ArticleCommentManagementController {
   @ResponseBody
   @GetMapping("/{articleCommentId}")
   public ArticleCommentResponse articleComment(@PathVariable Long articleCommentId) {
-    return null;
+    return ArticleCommentResponse.of(articleCommentManagementService.getArticleComment(articleCommentId));
   }
 
   @PostMapping("/{articleCommentId}")

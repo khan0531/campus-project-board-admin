@@ -5,6 +5,7 @@ import com.campus.projectboardadmin.dto.properties.ProjectProperties;
 import com.campus.projectboardadmin.dto.response.ArticleCommentClientResponse;
 import java.net.URI;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,17 @@ public class ArticleCommentManagementService {
     ArticleCommentClientResponse response = restTemplate.getForObject(uri, ArticleCommentClientResponse.class);
 
     return Optional.ofNullable(response).orElseGet(ArticleCommentClientResponse::empty).articleComments();
+  }
+
+  public ArticleCommentDto getArticleComment(Long articleCommentId) {
+    URI uri = UriComponentsBuilder.fromHttpUrl(projectProperties.board().url() + "/api/articleComments/" + articleCommentId)
+        .queryParam("projection", "withUserAccount")
+        .build()
+        .toUri();
+    ArticleCommentDto response = restTemplate.getForObject(uri, ArticleCommentDto.class);
+
+    return Optional.ofNullable(response)
+        .orElseThrow(() -> new NoSuchElementException("댓글이 없습니다 - articleCommentId: " + articleCommentId));
   }
 
 }
