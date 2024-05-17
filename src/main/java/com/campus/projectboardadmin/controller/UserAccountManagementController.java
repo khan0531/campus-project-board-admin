@@ -20,6 +20,10 @@ public class UserAccountManagementController {
 
   @GetMapping
   public String userAccounts(Model model) {
+    model.addAttribute(
+        "userAccounts",
+        userAccountManagementService.getUserAccounts().stream().map(UserAccountResponse::from).toList()
+    );
 
     return "management/user-accounts";
   }
